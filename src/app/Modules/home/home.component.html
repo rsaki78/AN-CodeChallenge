@@ -1,0 +1,56 @@
+<section>
+  <div>
+    <div class="text-center p-4">
+      <h2>- A GLOBAL DESIGN COMPANY -</h2>
+      <h1 class="display-1">Consulting Company</h1>
+    </div>
+
+    <mat-grid-list cols="3" rowHeight="350px">
+      <mat-grid-tile>
+        <div class="rounded-card bg-white m-3 p-5 cursor-pointer">
+          <i class="fas fa-globe fa-3x"></i>
+          <h4 class="mt-4 text-center">Home</h4>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="rounded-card bg-white m-3 p-5 cursor-pointer" [routerLink]="['/admin']">
+          <i class="fas fa-file-signature fa-3x"></i>
+          <h4 class="mt-4 text-center">Admin Section</h4>
+        </div>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <div class="rounded-card bg-white m-3 p-5 cursor-pointer" [routerLink]="['/contact-us']">
+          <i class="fas fa-headset fa-3x"></i>
+          <h4 class="mt-4 text-center">Contact Us</h4>
+        </div>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </div>
+</section>
+
+<section class="chart-container" *ngIf="isUserAuthenticated()" >
+  <h3 class="text-center">Restricted component (only logged users)</h3>
+  <app-chart [labels]="pieChartLabels" [data]="pieChartData" ></app-chart>
+</section>
+
+<section>
+  <div class="holidays-container" *ngIf="holidaysResponse" >
+    <div class="holiday-display" *ngFor="let holiday of holidaysResponse" >
+      <span>{{ holiday.name }}</span>
+      <span>{{ holiday.type }}</span>
+      <span>{{ formatHelper.getDateStr(holiday.date.iso) }}</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="holidays-container" *ngIf="cameraLensResponse" >
+    <div class="holiday-display" *ngFor="let cameraLens of cameraLensResponse" >
+      <span>{{ cameraLens.brand }}</span>
+      <span>{{ cameraLens.type }}</span>
+    </div>
+  </div>
+</section>

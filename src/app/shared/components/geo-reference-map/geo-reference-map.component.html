@@ -1,0 +1,12 @@
+<input type="text" class="form-control" placeholder="Street Address" [(ngModel)]="geofence.address" #addresstext/>
+
+<div class="g-map-container text-right border">
+  <div *ngIf="loading">
+    <i class="fas fa-spinner fa-2x fa-spin"></i>
+  </div>
+  <div *ngIf="!loading">
+    <agm-map [latitude]="geofence?.latitude" [longitude]="geofence?.longitude" [zoom]="zoom">
+      <agm-marker [latitude]="geofence?.latitude" [longitude]="geofence?.longitude"></agm-marker>
+    </agm-map>
+  </div>
+</div>

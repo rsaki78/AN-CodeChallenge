@@ -1,0 +1,57 @@
+<form class="mat-elevation-z2" [formGroup]="formGroup">
+  <h2 class="text-center">Reactive Form with static elements</h2>
+
+  <mat-form-field appearance="fill">
+    <mat-label>First Name</mat-label>
+    <input matInput formControlName="firstName">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Last Name</mat-label>
+    <input matInput formControlName="lastName">
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Email</mat-label>
+    <input matInput formControlName="email">
+  </mat-form-field>
+
+  <div class="text-right">
+    <button mat-raised-button color="primary" type="button" (click)="submitStaticForm()">Submit Static Form</button>
+  </div>
+</form>
+
+<form class="mat-elevation-z2" [formGroup]="dynamicFormGroup">
+  <h2 class="text-center">Reactive Form with dynamic elements</h2>
+
+  <div class="text-right">
+    <button mat-raised-button color="primary" type="button" (click)="addFormElement()">Add Form Element</button>
+  </div>
+
+  <div formArrayName="addresses">
+    <div *ngFor="let address of dynamicFormGroup.controls.addresses['controls'] let i=index">
+      <div>
+        <span>Address {{i + 1}}</span>
+      </div>
+
+      <div [formGroupName]="i" class="dynamic-form">
+        <mat-form-field appearance="fill">
+          <mat-label>Street</mat-label>
+          <input matInput formControlName="street">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Postal Code</mat-label>
+          <input matInput formControlName="postcode">
+        </mat-form-field>
+
+        <button mat-button color="warn" *ngIf="dynamicFormGroup.controls.addresses['controls'].length > 1" (click)="removeFormElement(i)">remove</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="text-right" *ngIf="dynamicFormGroup.controls.addresses['controls'].length > 0">
+    <button mat-raised-button color="primary" type="button" (click)="submitDynamicForm()">Submit Dynamic Form</button>
+  </div>
+
+</form>
